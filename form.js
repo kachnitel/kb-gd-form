@@ -5,11 +5,11 @@ $.urlParam = function(name){
 
 // 1) render form
 function createForm() {
-    $.getJSON( "./config.json", function( data ) {
+    $.getJSON( "./config.json", function(data) {
         if(data.type == "select") {
             // possibly add <datalist>
             var items = [];
-            $.each( data.options, function( key, val ) {
+            $.each( data.options, function(key, val) {
             items.push( "<option value='" + key + "'>" + val + "</option>" );
             });
 
@@ -19,6 +19,7 @@ function createForm() {
                 html: items.join( "" )
             }).prependTo( "form#dynamicForm" );
         } else if(data.type == "input") {
+            // TODO
             // use "subtype" to determine text, checkbox, number, ...
         } else {
             $("form#dynamicForm > :input[type=submit]").val("Input type not supported").prop('disabled', true);
@@ -29,7 +30,7 @@ function createForm() {
 
 // 2) upload to AWS
 function submit() {
-    $.getJSON( "./config.json", function( data ) {
+    $.getJSON( "./config.json", function(data) {
         AWS.config.update({accessKeyId: data.aws.key, secretAccessKey: data.aws.secret});
         var s3BucketName = data.aws.bucket;
         var s3RegionName = data.aws.region;
@@ -43,17 +44,12 @@ function submit() {
             $("#form-value").val()
         ].join(',');
         var file = new File([new Blob([body])], 'temp');
-console.log(file);
 
         var s3 = new AWS.S3({params: {Bucket: s3BucketName, Region: s3RegionName}});
         s3.putObject({Key: s3key, ContentType: "text/csv", Body: file},
         function(err, data) {
-            if (data !== null) {
-                alert("1");
-            }
-            else {
-                alert("2");
-            }
+            if (err) console.log(err); // an error occurred
+            else     console.log(data);           // successful response
         });
     });
 }
