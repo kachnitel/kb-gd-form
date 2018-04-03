@@ -12,16 +12,27 @@ Example URL: `http://localhost:8000/form.html?id=1234&pkname=campaign_id&keyname
 See `config.dist.json` for a structure of the config
 
 ## Type
-radio, input, select..
+***CURRENTLY ONLY SELECT IS IMPLEMENTED***
+radio, input, select..multiple buttons
 
-## Values
+## Subtype
+Used with input type to determine whether it is text, radio etc..
+
+## Options
+List of values for select, radio..
 
 ## S3
-token
+
+- **bucket**: S3 bucket name.
+- **region**: AWS region where the bucket resides.
+- **key** An AWS user Access Key
+- **secret**: An AWS user Access Key Secret
+- **prefix**: A virtual "folder" within the s3 bucket. (`upload-test/client666/`)
 
 # S3 Configuration
 
 ## IAM Policy for writing results
+Must be modified according to the bucket and prefix values from config
 
 ```
 {
