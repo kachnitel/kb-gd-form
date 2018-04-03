@@ -1,3 +1,5 @@
 .kdev4
 *.kdev4
 config.json
+*.kate-swp
+
