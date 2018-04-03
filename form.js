@@ -35,14 +35,25 @@ function submit() {
         var s3BucketName = data.aws.bucket;
         var s3RegionName = data.aws.region;
 
-        var s3key = data.aws.prefix + $.urlParam('pkname') + '_' + $.urlParam('id') + '.csv';
-        // TODO header
-        var body = [
+        timestamp = $.now();
+
+        var s3key = data.aws.prefix + $.urlParam('pkname') + '_' + $.urlParam('id') + '_' + timestamp + '.csv';
+
+        var header = [
+            'pkname',
+            'id',
+            'keyname',
+            'newvalue',
+            'timestamp'
+        ].join(',');
+        var data = [
             $.urlParam('pkname'),
             $.urlParam('id'),
             $.urlParam('keyname'),
-            $("#form-value").val()
+            $("#form-value").val(),
+            timestamp
         ].join(',');
+        var body = header + '\n' + data;
         var file = new File([new Blob([body])], 'temp');
 
         var s3 = new AWS.S3({params: {Bucket: s3BucketName, Region: s3RegionName}});
