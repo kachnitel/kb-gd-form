@@ -7,6 +7,7 @@
 Example URL: `http://localhost:8000/form.html?id=1234&pkname=campaign_id&keyname=importance`
 
 # JSON Configuration:
+***TODO***
 
 See `config.dist.json` for a structure of the config
 
@@ -18,7 +19,9 @@ radio, input, select..
 ## S3
 token
 
-### IAM Policy for writing results
+# S3 Configuration
+
+## IAM Policy for writing results
 
 ```
 {
@@ -52,7 +55,7 @@ token
 }
 ```
 
-### CORS Bucket Configuration
+## CORS Bucket Configuration
 
 ```
 <?xml version="1.0" encoding="UTF-8"?>
