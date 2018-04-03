@@ -2,7 +2,7 @@
 
 - **id**: The ID Value (Unique identifier, for instance the `campaign_id` value)
 - **pkname**: Name of the identifier (`campaign_id`)
-- **keyname**: Name of the value that**s being changed (`importance` etc..)
+- **keyname**: Name of the value that's being changed (`importance` etc..)
 
 Example URL: `http://localhost:8000/form.html?id=1234&pkname=campaign_id&keyname=importance`
 
@@ -90,3 +90,10 @@ Output file is named using `prefix` from JSON Configuration, appended by `pkname
 - **keyname**: Name of the modified key
 - **newvalue**: New value
 - **timestamp**: Current timestamp
+
+# Usage
+
+- Upload files `form.html`, `form.js` and `config.json` to a public server
+- Create an S3 bucket and user with permissions similar to the example [S3 Configuration](#s3-configuration)
+- Configure the bucket and user in `config.json` and always call the script with all [URL Parameters](#url-parameters)
+
