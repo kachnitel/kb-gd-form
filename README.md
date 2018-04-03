@@ -65,3 +65,13 @@ token
 </CORSConfiguration>
 ```
 
+# Output file
+
+Output file is named using `prefix` from JSON Configuration, appended by `pkname` from URL parameter, followed by `id` value from the URL parameter and a timestamp.
+
+## Columns
+    'pkname': Name of the primary key
+    'id'; The primary key
+    'keyname': Name of the modified key
+    'newvalue': New value
+    'timestamp': Current timestamp
