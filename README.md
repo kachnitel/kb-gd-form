@@ -9,6 +9,8 @@ Example URL: `http://localhost:8000/form.html?id=1234&pkname=campaign_id&keyname
 # JSON Configuration:
 ***TODO***
 
+The configuration file must be saved in `config.json`
+
 See `config.dist.json` for a structure of the config
 
 ## Type

@@ -18,7 +18,7 @@ function createForm() {
                 "class": "select-list",
                 "id": "form-value",
                 html: items.join( "" )
-            }).prependTo( "form#dynamicForm" );
+            }).prependTo( "form#dynamic-form" );
         } else if(data.type == "input") {
             // TODO
             // use "subtype" to determine text, checkbox, number, ...
@@ -31,6 +31,10 @@ function createForm() {
 
 // 2) upload to AWS
 function submit() {
+    // TODO confirm submit
+    var confirmationString = "Set '" + $.urlParam('keyname') + "' to: " + $("#form-value").val();
+    var confirmed = confirm(confirmationString);
+    if(!confirmed) return;
     $.getJSON( "./config.json", function(data) {
         AWS.config.update({accessKeyId: data.aws.key, secretAccessKey: data.aws.secret});
         var s3BucketName = data.aws.bucket;
