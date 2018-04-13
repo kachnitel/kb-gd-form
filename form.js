@@ -1,29 +1,50 @@
 $.urlParam = function(name){
     // TODO error catch
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
+    if(!results) {
+        console.log("Missing parameter" + name);
+        return 0;
+    }
     return results[1] || 0;
 }
 
 // 1) render form
 function createForm() {
-    $.getJSON( "./config.json", function(data) {
+    $.getJSON("./config.json", function(data) {
         if(data.type == "select") {
             // possibly add <datalist>
             var items = [];
-            $.each( data.options, function(key, val) {
-            items.push( "<option value='" + key + "'>" + val + "</option>" );
+            $.each(data.options, function(key, val) {
+                items.push("<option value='" + key + "'>" + val + "</option>" );
             });
 
-            $( "<select/>", {
+            $("<select/>", {
                 "class": "select-list",
                 "id": "form-value",
                 html: items.join( "" )
-            }).prependTo( "form#dynamic-form" );
+            }).prependTo("form#dynamic-form");
         } else if(data.type == "input") {
-            // TODO
-            // use "subtype" to determine text, checkbox, number, ...
+            // use "subtype" to determine text, number, ...
+            $("<input/>", {
+                "type": data.subtype || "text",
+                "id": "form-value"
+            }).prependTo("form#dynamic-form");
+        } else if(data.type == "radio") {
+            $.each(data.options, function(key, val) {
+//                 items.push("<input type='radio' name='radio' value='" + key + "'> " + val);
+                $("<input/>", {
+                    "type": "radio",
+                    "name": "radio",
+                    "id": key,
+                    "value": key
+                }).insertBefore("form#dynamic-form > :input[type=submit]");
+                $("<label/>", {
+                    "for": key,
+                    "text": val
+                }).insertBefore("form#dynamic-form > :input[type=submit]");
+            })
         } else {
-            $("form#dynamicForm > :input[type=submit]").val("Input type not supported").prop('disabled', true);
+            $("form#dynamic-form > :input[type=submit]").val("Input type not supported").prop('disabled', true);
         }
         // Yes/No buttons
     });
@@ -31,10 +52,10 @@ function createForm() {
 
 // 2) upload to AWS
 function submit() {
-    // TODO confirm submit
     var confirmationString = "Set '" + $.urlParam('keyname') + "' to: " + $("#form-value").val();
     var confirmed = confirm(confirmationString);
     if(!confirmed) return;
+
     $.getJSON( "./config.json", function(data) {
         AWS.config.update({accessKeyId: data.aws.key, secretAccessKey: data.aws.secret});
         var s3BucketName = data.aws.bucket;

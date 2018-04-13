@@ -7,18 +7,38 @@
 Example URL: `http://localhost:8000/form.html?id=1234&pkname=campaign_id&keyname=importance`
 
 # JSON Configuration:
-***TODO***
 
 The configuration file must be saved in `config.json`
 
 See `config.dist.json` for a structure of the config
 
 ## Type
-***CURRENTLY ONLY SELECT IS IMPLEMENTED***
-radio, input, select..multiple buttons
+radio, input, select..multiple buttons TODO
 
-## Subtype
-Used with input type to determine whether it is text, radio etc..
+### `select` & `radio`
+    - Populate **options** with key: value pairs, where the **key** will be **submitted** while **value** will be **displayed**.
+
+### `input`
+
+    - By default, the input will be a text field, unless a [Subtype](#subtype) is configured.
+
+#### Subtype
+
+Used **only** with `"type": "input"` to determine whether it is text, radio etc..
+
+Has to be one of the following
+
+### Subtype options:
+
+- `text`
+- `number`
+
+    - Can use `min` and `max` in **options**
+    - TODO
+
+- `date`
+- `color`
+- `email`
 
 ## Options
 List of values for select, radio..
