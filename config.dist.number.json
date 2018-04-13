@@ -1,0 +1,12 @@
+{
+    "type": "input",
+    "subtype": "number",
+    "aws": {
+        "bucket": "keboola-gd-dev",
+        "region": "us-west-2",
+        "key": "",
+        "secret": "",
+        "prefix": "upload-test/client666/"
+    }
+}
+

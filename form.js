@@ -34,7 +34,7 @@ function createForm() {
 //                 items.push("<input type='radio' name='radio' value='" + key + "'> " + val);
                 $("<input/>", {
                     "type": "radio",
-                    "name": "radio",
+                    "name": "form-value",
                     "id": key,
                     "value": key
                 }).insertBefore("form#dynamic-form > :input[type=submit]");
@@ -52,7 +52,9 @@ function createForm() {
 
 // 2) upload to AWS
 function submit() {
-    var confirmationString = "Set '" + $.urlParam('keyname') + "' to: " + $("#form-value").val();
+    var value = $("#form-value").val() || $("input[name='form-value']:checked").val();
+
+    var confirmationString = "Set '" + $.urlParam('keyname') + "' to: " + value;
     var confirmed = confirm(confirmationString);
     if(!confirmed) return;
 
@@ -76,7 +78,7 @@ function submit() {
             $.urlParam('pkname'),
             $.urlParam('id'),
             $.urlParam('keyname'),
-            $("#form-value").val(),
+            value,
             timestamp
         ].join(',');
         var body = header + '\n' + data;
