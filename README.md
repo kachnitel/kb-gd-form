@@ -16,11 +16,12 @@ See `config.dist.json` for a structure of the config
 radio, input, select..multiple buttons TODO
 
 ### `select` & `radio`
-    - Populate **options** with key: value pairs, where the **key** will be **submitted** while **value** will be **displayed**.
+
+- Populate **options** with key: value pairs, where the **key** will be **submitted** while **value** will be **displayed**.
 
 ### `input`
 
-    - By default, the input will be a text field, unless a [Subtype](#subtype) is configured.
+- By default, the input will be a text field, unless a [Subtype](#subtype) is configured.
 
 #### Subtype
 
