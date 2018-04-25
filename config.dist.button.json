@@ -1,7 +1,9 @@
 {
-    "type": "input",
-    "subtype": "number",
-    "min": 0,
+    "type": "button",
+    "options": {
+        "yes": "Yes",
+        "no": "No"
+    },
     "aws": {
         "bucket": "keboola-gd-dev",
         "region": "us-west-2",
@@ -10,4 +12,3 @@
         "prefix": "upload-test/client666/"
     }
 }
-

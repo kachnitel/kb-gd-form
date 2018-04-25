@@ -68,6 +68,18 @@ function createForm() {
     });
 }
 
+function validateValue(value, config) {
+    if(typeof(config.min) != "undefined" && config.min !== null && value < config.min) {
+        alert("Value (" + value + ") has to be higher than " + config.min);
+        return 0;
+    }
+    if(typeof(config.max) != "undefined" && config.max !== null && value > config.max) {
+        alert("Value (" + value + ") has to be lower than " + config.max);
+        return 0;
+    }
+    return 1;
+}
+
 // 2) upload to AWS
 function submit() {
     var value = $("#form-value").val() || $("input[name='form-value']:checked").val();
@@ -77,6 +89,10 @@ function submit() {
     if(!confirmed) return;
 
     $.getJSON( "./config.json", function(data) {
+        if(!validateValue(value, data)) {
+            return;
+        }
+
         AWS.config.update({accessKeyId: data.aws.key, secretAccessKey: data.aws.secret});
         var s3BucketName = data.aws.bucket;
         var s3RegionName = data.aws.region;

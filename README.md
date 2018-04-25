@@ -34,8 +34,7 @@ Has to be one of the following
 - `text`
 - `number`
 
-    - Can use `min` and `max` in **options**
-    - TODO
+    - Can use `min` and `max` in config to limit minimum and maximum values (see config.dist.number.json)
 
 - `date`
 - `color`
