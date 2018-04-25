@@ -84,6 +84,11 @@ function validateValue(value, config) {
 function submit() {
     var value = $("#form-value").val() || $("input[name='form-value']:checked").val();
 
+    if(value === undefined) {
+        alert("Value is not set!");
+        return;
+    }
+
     var confirmationString = "Set '" + $.urlParam('keyname') + "' to: " + value;
     var confirmed = confirm(confirmationString);
     if(!confirmed) return;
