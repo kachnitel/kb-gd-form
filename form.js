@@ -2,7 +2,7 @@ $.urlParam = function(name){
     // TODO error catch
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if(!results) {
-        console.log("Missing parameter" + name);
+        console.log("Missing parameter " + name);
         return 0;
     }
     return results[1] || 0;
@@ -37,14 +37,32 @@ function createForm() {
                     "name": "form-value",
                     "id": key,
                     "value": key
-                }).insertBefore("form#dynamic-form > :input[type=submit]");
+                }).insertBefore("#formsend");
                 $("<label/>", {
                     "for": key,
                     "text": val
-                }).insertBefore("form#dynamic-form > :input[type=submit]");
+                }).insertBefore("#formsend");
             })
+        } else if (data.type == "button") {
+            // create a hidden input to set value after clicking button
+            $("<input/>", {
+                "type": "hidden",
+                "id": "form-value"
+            }).insertAfter("#formsend");
+
+            $.each(data.options, function(key, val) {
+                $("<button/>", {
+                    "type": "submit",
+                    "id": key,
+                    "value": key,
+                    "text": val
+                }).click(function() {
+                    $("#form-value").val(key);
+                }).insertBefore("#formsend");
+            })
+            $("#formsend").remove();
         } else {
-            $("form#dynamic-form > :input[type=submit]").val("Input type not supported").prop('disabled', true);
+            $("#formsend").val("Input type not supported").prop('disabled', true);
         }
         // Yes/No buttons
     });

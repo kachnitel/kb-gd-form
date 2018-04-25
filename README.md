@@ -13,9 +13,9 @@ The configuration file must be saved in `config.json`
 See `config.dist.json` for a structure of the config
 
 ## Type
-radio, input, select..multiple buttons TODO
+radio, input, select or multiple buttons
 
-### `select` & `radio`
+### `select` & `radio` & `button`
 
 - Populate **options** with key: value pairs, where the **key** will be **submitted** while **value** will be **displayed**.
 
@@ -25,7 +25,7 @@ radio, input, select..multiple buttons TODO
 
 #### Subtype
 
-Used **only** with `"type": "input"` to determine whether it is text, radio etc..
+Used **only** with `"type": "input"` to determine whether it is text, number etc..
 
 Has to be one of the following
 
